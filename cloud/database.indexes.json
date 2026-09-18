@@ -1,0 +1,573 @@
+{
+  "description": "索引配置清单，按 fields 顺序在微信云开发控制台创建；不是 CLI 自动导入文件。16 个可选筛选组合索引用于任意组合筛选，基础与统计索引优先建立。",
+  "indexes": [
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_0",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_1",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_2",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_3",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_4",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_5",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_6",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_7",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_8",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_9",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_10",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_11",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_12",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_13",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_14",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_filter_15",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "subject",
+          "order": "asc"
+        },
+        {
+          "field": "chapter",
+          "order": "asc"
+        },
+        {
+          "field": "knowledgePoints",
+          "order": "asc"
+        },
+        {
+          "field": "status",
+          "order": "asc"
+        },
+        {
+          "field": "createdAt",
+          "order": "desc"
+        },
+        {
+          "field": "_id",
+          "order": "desc"
+        }
+      ]
+    },
+    {
+      "collection": "mistakes",
+      "name": "mistakes_summary",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "deletedAt",
+          "order": "asc"
+        },
+        {
+          "field": "_id",
+          "order": "asc"
+        }
+      ]
+    },
+    {
+      "collection": "practice_sets",
+      "name": "practice_sets_by_mistake",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "mistakeId",
+          "order": "asc"
+        },
+        {
+          "field": "_id",
+          "order": "asc"
+        }
+      ]
+    },
+    {
+      "collection": "practice_records",
+      "name": "practice_records_by_set",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "setId",
+          "order": "asc"
+        },
+        {
+          "field": "_id",
+          "order": "asc"
+        }
+      ]
+    },
+    {
+      "collection": "practice_records",
+      "name": "practice_records_by_owner",
+      "unique": false,
+      "fields": [
+        {
+          "field": "_openid",
+          "order": "asc"
+        },
+        {
+          "field": "_id",
+          "order": "asc"
+        }
+      ]
+    }
+  ]
+}
