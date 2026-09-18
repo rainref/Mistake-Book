@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/library/library",
+    "pages/review/review",
+    "pages/profile/profile",
+    "pages/capture/capture",
+    "pages/detail/detail",
+    "pages/practice/practice",
+    "pages/stats/stats",
+    "pages/ai-config/ai-config"
+  ],
+  "window": {
+    "navigationBarTitleText": "拾错 · AI 错题学习",
+    "navigationBarBackgroundColor": "#f5f7f4",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f7f4",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#7a847e",
+    "selectedColor": "#24654b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "学习"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "text": "错题库"
+      },
+      {
+        "pagePath": "pages/review/review",
+        "text": "复习"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

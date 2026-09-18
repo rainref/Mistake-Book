@@ -1,0 +1,12 @@
+{
+  "name": "shicuo-wechat",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check.cjs"
+  },
+  "devDependencies": {
+    "miniprogram-automator": "0.12.1"
+  }
+}
