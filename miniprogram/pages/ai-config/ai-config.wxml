@@ -1,0 +1,58 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">AI SETTINGS</view>
+    <view class="title">接入你的 AI 模型。</view>
+    <view class="subtitle">配置保存在你自己的云环境数据库中，用于识题解析与生成练习。</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在读取配置…</view>
+  <block wx:elif="{{provider}}">
+    <view class="card">
+      <text class="label">模型供应商</text>
+      <picker range="{{providerNames}}" value="{{providerIndex}}" bindchange="pickProvider">
+        <view class="picker">{{provider.name}} ▾</view>
+      </picker>
+      <view wx:if="{{provider.note}}" class="notice">{{provider.note}}</view>
+      <block wx:if="{{provider.needKey}}">
+        <text class="label">API Key</text>
+        <input password value="{{apiKey}}" data-field="apiKey" bindinput="input" placeholder="粘贴供应商平台创建的 API Key" />
+        <view wx:if="{{hasKey}}" class="notice">已保存过 Key，留空表示不修改。</view>
+      </block>
+      <block wx:if="{{provider.id !== 'cloudbase'}}">
+        <text class="label">接口地址</text>
+        <input value="{{baseUrl}}" data-field="baseUrl" bindinput="input" placeholder="https://..." />
+        <view class="notice">已按供应商自动填好，一般无需修改。</view>
+        <text class="label">请求格式</text>
+        <picker range="{{formatNames}}" value="{{format === 'anthropic' ? 1 : 0}}" bindchange="pickFormat">
+          <view class="picker">{{format === 'anthropic' ? 'Anthropic 兼容（/v1/messages）' : 'OpenAI 兼容（chat/completions）'}} ▾</view>
+        </picker>
+        <view class="notice">已按供应商自动选好；只有确认接口协议与默认不同时才需要改。</view>
+      </block>
+    </view>
+    <view class="card">
+      <text class="label">文本模型（解析 / 生成练习）</text>
+      <input value="{{textModel}}" data-field="textModel" bindinput="input" placeholder="填写模型名称" />
+      <view wx:if="{{provider.textModels.length}}" class="chips">
+        <text wx:for="{{provider.textModels}}" wx:key="*this" class="chip" data-field="textModel" data-value="{{item}}" bindtap="fill">{{item}}</text>
+      </view>
+      <text class="label">视觉模型（图片识题，可留空）</text>
+      <input value="{{visionModel}}" data-field="visionModel" bindinput="input" placeholder="填写视觉模型名称" />
+      <view wx:if="{{provider.visionModels.length}}" class="chips">
+        <text wx:for="{{provider.visionModels}}" wx:key="*this" class="chip" data-field="visionModel" data-value="{{item}}" bindtap="fill">{{item}}</text>
+      </view>
+      <view wx:else class="notice">该供应商无可用视觉模型，拍照识题不可用，可在录题页手动输入题目。</view>
+    </view>
+    <view class="actions">
+      <button class="primary" loading="{{saving}}" disabled="{{saving}}" bindtap="save">保存配置</button>
+      <button loading="{{testing}}" disabled="{{testing || !saved}}" bindtap="test">测试连接</button>
+    </view>
+    <view wx:if="{{error}}" class="error">{{error}}
+      <view class="link" bindtap="load">重试</view>
+    </view>
+    <view wx:if="{{message}}" class="notice success">{{message}}</view>
+    <view class="notice">Key 保存在云端集合 ai_settings 中，仅你本人可读写，返回前端时以掩码展示。调用时才由云函数直接使用，不会经过小程序端。</view>
+  </block>
+  <view wx:elif="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重试</view>
+  </view>
+</view>

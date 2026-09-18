@@ -1,0 +1,5 @@
+.finish {
+  margin-top: 28rpx;
+  border-color: #acc8ad;
+  background: #f0f5eb
+}

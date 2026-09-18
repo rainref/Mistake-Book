@@ -1,0 +1,49 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">YOUR PROGRESS</view>
+    <view class="title">进步，有迹可循。</view>
+    <view class="subtitle">每一次订正和练习，都是积累。</view>
+  </view>
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重试</view>
+  </view>
+  <block wx:if="{{summary}}">
+    <view class="metrics">
+      <view class="card">
+        <view class="metric">{{summary.total}}</view>
+        <view class="muted">收录错题</view>
+      </view>
+      <view class="card">
+        <view class="metric">{{masteryRate}}%</view>
+        <view class="muted">自主标记掌握率</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="row">
+        <view class="section-title">练习记录</view>
+        <view class="pill">自评答对率 {{rate}}%</view>
+      </view>
+      <view class="muted">累计作答 {{summary.practiceCount}} 次，其中自评答对 {{summary.correctCount}} 次。重复练习按每次作答计入。</view>
+      <view class="chart">
+        <view wx:for="{{activity}}" wx:key="day" class="chart-col">
+          <view>{{item.count}}</view>
+          <view class="chart-stick" style="height:{{item.height}}rpx"></view>
+          <view>{{item.day}}</view>
+        </view>
+      </view>
+      <view class="notice">最近七天作答次数（北京时间）</view>
+    </view>
+    <view class="card">
+      <view class="section-title">学科分布</view>
+      <view wx:for="{{subjects}}" wx:key="name">
+        <view class="row"><text>{{item.name}}</text><text class="count">{{item.total}} 道 · {{item.pending}} 道待掌握</text></view>
+        <view class="bar">
+          <view class="bar-fill" style="width:{{item.width}}%"></view>
+        </view>
+      </view>
+      <view wx:if="{{!subjects.length}}" class="empty">录入错题后，这里会展示学科分布。</view>
+    </view>
+  </block>
+  <view wx:if="{{loading}}" class="loading">正在统计…</view>
+</view>

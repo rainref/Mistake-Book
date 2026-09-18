@@ -1,0 +1,29 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">MY LEARNING SPACE</view>
+    <view class="title">按自己的节奏进步。</view>
+    <view class="subtitle">完善年级，让解析与练习更贴近你的学习阶段。</view>
+  </view>
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重试</view>
+  </view>
+  <view class="card"><text class="label">称呼</text><input value="{{name}}" data-field="name" bindinput="input" maxlength="30" placeholder="怎么称呼你" /><text class="label">当前年级</text>
+    <picker range="{{grades}}" value="{{gradeIndex}}" bindchange="pick">
+      <view class="picker">{{grades[gradeIndex]}} ▾</view>
+    </picker>
+    <view class="actions"><button class="primary" loading="{{saving}}" disabled="{{loading || saving || mode === 'setup'}}" bindtap="save">保存资料</button></view>
+  </view>
+  <view class="card">
+    <view class="row">
+      <view>学习统计</view><button class="small" bindtap="stats">查看进度 ›</button>
+    </view>
+    <view class="divider" />
+    <view class="row"><text>当前运行模式</text><text class="pill">{{mode === 'cloud' ? '微信云开发' : mode === 'demo' ? '本地演示' : '待配置'}}</text></view>
+    <view wx:if="{{mode === 'cloud'}}" class="notice">{{aiConfigured ? '文本与视觉模型名称已配置，调用时还需云端模型可用。' : '模型未完整配置，请在下方配置供应商与模型。'}}</view>
+    <view class="actions"><button wx:if="{{mode === 'cloud'}}" class="small primary" bindtap="aiConfig">AI 模型配置</button></view>
+    <view class="actions"><button wx:if="{{mode !== 'demo'}}" class="small" bindtap="demo">体验演示</button><button wx:else class="small primary" bindtap="cloud">返回云开发</button><button wx:if="{{mode === 'demo'}}" class="small" bindtap="reset">重置演示</button></view>
+  </view>
+  <button bindtap="privacy">数据与使用说明</button>
+  <view class="notice">拾错 v1.0 · 拍照识题、订正归纳、再练习。<view></view>AI 辅助理解，独立思考让方法真正属于你。</view>
+</view>

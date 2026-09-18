@@ -1,0 +1,32 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">REVIEW BY KNOWLEDGE</view>
+    <view class="title">把薄弱点，逐个补齐。</view>
+    <view class="subtitle">按知识点重看旧题，记住方法，再练一组。</view>
+  </view>
+  <view wx:if="{{summary}}" class="card row">
+    <view>
+      <view class="metric">{{summary.pending}}</view>
+      <view class="muted">道错题等待掌握</view>
+    </view>
+    <view class="muted">已掌握 {{summary.mastered}} 道<view></view>练习 {{summary.practiceCount}} 次</view>
+  </view>
+  <view class="filter-row">
+    <picker range="{{subjects}}" value="{{subjectIndex}}" bindchange="pick">
+      <view class="picker">{{subjects[subjectIndex]}} ▾</view>
+    </picker><input value="{{query}}" bindinput="input" placeholder="找知识点或章节" />
+  </view>
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重新加载</view>
+  </view>
+  <view wx:for="{{tags}}" wx:key="key" class="card" data-index="{{index}}" bindtap="open">
+    <view class="muted">{{item.subject}} / {{item.chapter}}</view>
+    <view class="row">
+      <view class="section-title">{{item.name}}</view><text class="pill {{item.pending ? 'gold' : ''}}">{{item.pending ? '待巩固 ' + item.pending : '已掌握'}}</text>
+    </view>
+    <view class="row"><text class="count">来自 {{item.count}} 道历史错题</text><text class="link">查看与再练习 ›</text></view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在整理知识点…</view>
+  <view wx:elif="{{!tags.length && !error}}" class="empty">还没有匹配的知识点。<view></view>分析或编辑错题后，标签会自动归入这里。</view>
+</view>

@@ -1,0 +1,38 @@
+<view class="page">
+  <mode-banner />
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重新加载</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在打开练习组…</view>
+  <block wx:if="{{question}}">
+    <view class="hero">
+      <view class="eyebrow">PRACTICE THE METHOD</view>
+      <view class="row">
+        <view class="title">第 {{index + 1}} / {{set.questions.length}} 题</view><text class="pill">{{set.difficulty}}</text>
+      </view>
+      <view class="subtitle">本轮已完成 {{completed}} 道，自评答对 {{correct}} 道。</view>
+      <view class="bar">
+        <view class="bar-fill" style="width:{{completed / set.questions.length * 100}}%"></view>
+      </view>
+    </view>
+    <view class="card"><text class="question" user-select>{{question.questionText}}</text>
+      <view><text wx:for="{{question.knowledgePoints}}" wx:key="*this" class="pill">{{item}}</text></view>
+      <view class="link" bindtap="hint">{{showHint ? '收起提示' : '给我一点思路提示'}}</view>
+      <view wx:if="{{showHint}}" class="notice">{{question.hint}}</view>
+      <text class="label">先写下你的答案或过程</text><textarea class="textarea-lg" maxlength="6000" value="{{answer}}" bindinput="input" disabled="{{recorded || saving}}" placeholder="可以在这里输入，也可以先在纸上演算。" />
+      <view class="actions"><button wx:if="{{!revealed}}" class="primary" bindtap="reveal">完成思考，核对答案</button></view>
+    </view>
+    <view wx:if="{{revealed}}" class="card"><text class="label">参考答案</text><text class="question" user-select>{{question.answer}}</text><text class="label">分步解析</text>
+      <view wx:for="{{question.steps}}" wx:key="*this" class="question">{{index + 1}}. {{item}}</view>
+      <view class="notice">请对照参考解析自评。结果将记录到你的学习统计。</view>
+      <view class="actions"><button bindtap="record" data-correct="no" disabled="{{recorded || saving}}">还没掌握</button><button bindtap="record" data-correct="yes" class="primary" disabled="{{recorded || saving}}">这题答对了</button></view>
+      <view wx:if="{{recorded}}" class="notice">本题结果已保存。</view>
+    </view>
+    <view class="actions"><button data-delta="-1" bindtap="move" disabled="{{index === 0 || saving}}">上一题</button><button data-delta="1" bindtap="move" disabled="{{index === set.questions.length - 1 || saving}}">下一题</button></view>
+    <view wx:if="{{finished}}" class="card finish">
+      <view class="section-title">这一组，练完了。</view>
+      <view class="muted">本轮 {{set.questions.length}} 道题，自评答对 {{correct}} 道。<view></view>回到原题，看看现在能否说清解题方法。</view>
+    </view>
+    <view class="actions"><button bindtap="restart" disabled="{{saving}}">保留记录，再练一遍</button></view>
+  </block>
+</view>
