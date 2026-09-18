@@ -1,0 +1,21 @@
+const test = require('node:test')
+const assert = require('node:assert/strict')
+const { cloudError } = require('../miniprogram/utils/cloud-error')
+test('云函数不存在时提供对应的部署步骤并保留平台错误码', () => {
+  const e = cloudError({ errCode: -1, errMsg: 'FUNCTION_NOT_FOUND' }, 'env-a', 'notebook')
+  assert.match(e.message, /未找到 notebook/); assert.match(e.message, /云端安装依赖/); assert.match(e.message, /错误码：-1/)
+})
+test('环境、权限和超时被区分，不推断未经证实的数值错误码含义', () => {
+  assert.match(cloudError({errMsg:'ENV_NOT_FOUND'},'env-a','notebook').message,/环境不存在/)
+  assert.match(cloudError({errMsg:'permission denied'},'env-a','notebook').message,/权限不足/)
+  assert.match(cloudError({errMsg:'request timed out'},'env-a','notebook').message,/调用超时/)
+  assert.match(cloudError({errMsg:'request timed out'},'env-a','notebook').message,/60 秒/)
+  assert.match(cloudError({errMsg:'TIME_LIMIT_EXCEEDED'},'env-a','notebook').message,/本地调试/)
+  assert.match(cloudError({errCode:-9999},'env-a','notebook').message,/云函数连接失败/)
+})
+test('诊断信息截断并脱敏，异常错误值仍然可读', () => {
+  const e=cloudError({errMsg:'token=abc password:xyz ' + 'a'.repeat(2000)},'env-a','notebook')
+  assert.ok(!e.diagnostic.message.includes('abc')); assert.ok(!e.diagnostic.message.includes('xyz'))
+  assert.ok(e.diagnostic.message.length<=1200)
+  assert.match(cloudError(null,'env-a','notebook').message,/云函数连接失败/)
+})
