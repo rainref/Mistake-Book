@@ -1,0 +1,35 @@
+.capture-card {
+  background: #245840;
+  border-radius: 26rpx;
+  padding: 32rpx;
+  color: white;
+  margin-bottom: 28rpx
+}
+
+.capture-title {
+  font-size: 34rpx;
+  font-weight: 600
+}
+
+.capture-sub {
+  font-size: 24rpx;
+  color: #c6dacb;
+  margin-top: 12rpx
+}
+
+.capture-plus {
+  width: 76rpx;
+  height: 76rpx;
+  border: 1rpx solid #799d85;
+  border-radius: 22rpx;
+  text-align: center;
+  font-size: 46rpx;
+  line-height: 70rpx
+}
+
+.capture-bottom {
+  border-top: 1rpx solid #49735b;
+  margin-top: 28rpx;
+  padding-top: 22rpx;
+  font-size: 25rpx
+}

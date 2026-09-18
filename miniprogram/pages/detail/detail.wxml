@@ -1,0 +1,52 @@
+<view class="page">
+  <mode-banner />
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view class="link" bindtap="load">重新加载</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在加载错题…</view>
+  <block wx:if="{{item}}">
+    <view class="row"><text class="pill">{{item.subject}} · {{item.chapter}}</text><text class="count">{{item.statusLabel}}</text></view>
+    <view class="section-title">先独立想一想</view>
+    <view class="card">
+      <image wx:if="{{fileID}}" src="{{fileID}}" mode="widthFix" class="photo" bindtap="preview" /><text class="question" user-select>{{item.questionText}}</text>
+      <view class="divider" /><text wx:for="{{item.knowledgePoints}}" wx:key="*this" class="pill" data-name="{{item}}" bindtap="tag">{{item}} ›</text>
+    </view>
+    <button bindtap="reveal">{{revealed ? '收起参考解析' : '查看解题思路与分步解析'}}</button>
+    <block wx:if="{{revealed}}">
+      <view class="section-title">方法，比答案更重要</view>
+      <view class="card"><text class="label">解题思路</text><text class="question" user-select>{{item.approach || '暂无解析，可在编辑页使用 AI 分析。'}}</text>
+        <view class="divider" />
+        <view wx:for="{{item.steps}}" wx:key="*this" class="step"><text class="step-no">{{index + 1}}</text><text class="question grow" user-select>{{item}}</text></view><text class="label">参考答案</text><text class="question" user-select>{{item.answer}}</text>
+      </view>
+      <view wx:if="{{item.pitfalls.length}}" class="card">
+        <view class="section-title">容易踩到的坑</view>
+        <view wx:for="{{item.pitfalls}}" wx:key="*this" class="question">• {{item}}</view>
+        <view class="notice">一般易错提醒；你的实际错误原因记录在下方。</view>
+      </view>
+    </block>
+    <view class="row">
+      <view class="section-title">我的错因与订正</view><text class="link" bindtap="edit">补充 / 修改 ›</text>
+    </view>
+    <view class="card"><text class="label">我为什么错</text><text class="question" user-select>{{item.wrongReason || '还没有记录。回想一下卡在哪一步？'}}</text><text class="label">我重新做了一遍</text><text class="question" user-select>{{item.correction || '用自己的话写下订正过程，让方法留下来。'}}</text></view>
+    <view class="actions"><button class="small {{item.status === 'reviewing' ? 'selected' : ''}}" data-status="reviewing" bindtap="status" disabled="{{busy}}">继续复习</button><button class="small {{item.status === 'mastered' ? 'selected' : ''}}" data-status="mastered" bindtap="status" disabled="{{busy}}">我已掌握</button></view>
+    <view class="section-title">错一题，练一组</view>
+    <view class="card">
+      <view class="filter-row">
+        <picker range="{{counts}}" value="{{countIndex}}" data-field="countIndex" bindchange="pick" disabled="{{busy}}">
+          <view class="picker">{{counts[countIndex]}} 道题 ▾</view>
+        </picker>
+        <picker range="{{difficulties}}" value="{{difficultyIndex}}" data-field="difficultyIndex" bindchange="pick" disabled="{{busy}}">
+          <view class="picker">{{difficulties[difficultyIndex]}} ▾</view>
+        </picker>
+      </view><button class="primary" bindtap="generate" disabled="{{busy}}" loading="{{busy}}">{{mode === 'demo' ? '载入预置示例练习组' : 'AI 生成同类型练习组'}}</button>
+      <view class="notice">{{mode === 'demo' ? '演示组使用固定题库，难度选择不改变预置内容。' : '练习组将保存到云端，下次可以继续作答或重新练习。'}}</view>
+    </view>
+    <view wx:if="{{sets.length}}" class="section-title">以前的练习组</view>
+    <view wx:for="{{sets}}" wx:key="id" class="card row" data-id="{{item.id}}" bindtap="practice">
+      <view>{{item.count}} 道 · {{item.difficulty}}
+        <view class="count">{{item.dateLabel}}</view>
+      </view><text class="link">继续练习 ›</text>
+    </view>
+    <view class="actions"><button bindtap="edit" disabled="{{busy}}">编辑错题</button><button class="danger" bindtap="remove" disabled="{{busy}}">删除错题</button></view>
+  </block>
+</view>

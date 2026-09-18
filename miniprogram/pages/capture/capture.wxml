@@ -1,0 +1,42 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">CAPTURE · UNDERSTAND · CORRECT</view>
+    <view class="title">{{editing ? '把思路重新理清。' : '今天，弄懂这道题。'}}</view>
+    <view class="subtitle">拍下单道错题，核对识别内容，再留下你的订正。</view>
+  </view>
+  <view wx:if="{{error}}" class="error">{{error}}
+    <view wx:if="{{!ready}}" class="link" bindtap="retry">重新连接</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在加载…</view>
+  <view class="card">
+    <view class="row">
+      <view class="section-title">01 · 题目资料</view><text class="count">{{grade}}</text>
+    </view>
+    <image wx:if="{{photo}}" class="photo" src="{{photo}}" mode="widthFix" />
+    <view class="actions"><button bindtap="choose" disabled="{{busy || loading || !ready || mode !== 'cloud'}}">{{photo ? '更换题目图片' : '拍照 / 相册选题'}}</button><button wx:if="{{photo}}" bindtap="removePhoto" disabled="{{busy || !ready}}">移除</button></view>
+    <view wx:if="{{mode === 'demo'}}" class="actions"><button bindtap="sample" disabled="{{busy || loading || !ready}}">载入示例题与预置解析</button></view>
+    <text class="label">题目内容</text><textarea class="textarea-lg" maxlength="6000" value="{{questionText}}" data-field="questionText" bindinput="input" placeholder="可直接输入题目，或选图后点击 AI 分析" disabled="{{busy || loading || !ready}}" />
+    <text class="label">学科</text>
+    <picker range="{{subjects}}" value="{{subjectIndex}}" bindchange="subject" disabled="{{busy || loading || !ready}}">
+      <view class="picker">{{subjects[subjectIndex]}} ▾</view>
+    </picker>
+    <view class="actions"><button class="primary" bindtap="analyze" disabled="{{busy || loading || !ready}}" loading="{{busy}}">识题与 AI 分步解析</button></view>
+    <view class="notice">图片仅用于识题与保存原题。请裁剪掉姓名等无关信息。AI 结果请核对后保存。</view>
+  </view>
+  <view wx:if="{{progress}}" class="loading">{{progress}}</view>
+  <view class="card">
+    <view class="section-title">02 · 解析与知识归纳</view>
+    <text class="label">章节</text><input maxlength="80" value="{{chapter}}" data-field="chapter" bindinput="input" placeholder="如一元一次方程" disabled="{{busy || !ready}}" />
+    <text class="label">知识点标签（用逗号分隔）</text><input maxlength="700" value="{{pointsText}}" data-field="pointsText" bindinput="input" placeholder="如去括号，移项与变号" disabled="{{busy || !ready}}" />
+    <text class="label">解题思路</text><textarea maxlength="3000" value="{{approach}}" data-field="approach" bindinput="input" placeholder="先考虑什么，使用什么方法？" disabled="{{busy || !ready}}" />
+    <text class="label">分步骤解析（每行一步）</text><textarea class="textarea-lg" maxlength="18000" value="{{stepsText}}" data-field="stepsText" bindinput="input" placeholder="每一步既写操作，也写理由" disabled="{{busy || !ready}}" />
+    <text class="label">参考答案</text><textarea maxlength="4000" value="{{answer}}" data-field="answer" bindinput="input" disabled="{{busy || !ready}}" />
+    <text class="label">一般易错点（每行一条）</text><textarea maxlength="6000" value="{{pitfallsText}}" data-field="pitfallsText" bindinput="input" placeholder="AI 归纳的常见错误提醒" disabled="{{busy || !ready}}" />
+  </view>
+  <view class="card">
+    <view class="section-title">03 · 我的订正</view><text class="label">这一次，我为什么错？</text><textarea maxlength="3000" value="{{wrongReason}}" data-field="wrongReason" bindinput="input" placeholder="写自己的实际原因：概念不清、审题遗漏、计算失误…" disabled="{{busy || !ready}}" /><text class="label">我的订正结果</text><textarea class="textarea-lg" maxlength="6000" value="{{correction}}" data-field="correction" bindinput="input" placeholder="用自己的话重写过程与结果" disabled="{{busy || !ready}}" />
+  </view>
+  <button class="primary" bindtap="save" loading="{{busy}}" disabled="{{busy || loading || !ready}}">{{editing ? '保存订正与修改' : '保存到我的错题库'}}</button>
+  <view class="notice">未保存的输入会暂存为本机草稿。</view>
+</view>

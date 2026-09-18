@@ -1,0 +1,54 @@
+<view class="page">
+  <mode-banner />
+  <view class="hero">
+    <view class="eyebrow">拾错 / LEARN FROM MISTAKES</view>
+    <view class="title">每一道错题，<view></view>都能成为一次进步。</view>
+    <view class="subtitle">{{name}}，今天从“弄懂为什么”开始。</view>
+  </view>
+  <view wx:if="{{mode === 'setup'}}" class="card">
+    <view class="section-title">准备开启学习</view>
+    <view class="question">项目已采用微信云开发。填写云环境 ID 并部署 notebook 云函数后，就可以使用拍照识题和云端错题库。</view>
+    <view class="notice">配置文件：miniprogram/config.js<view></view>完整步骤见项目 README.md</view>
+    <view class="actions"><button class="primary" bindtap="demo">先体验本地演示</button></view>
+  </view>
+  <block wx:else>
+    <view wx:if="{{error}}" class="error">{{error}}
+      <view class="link" bindtap="load">重新连接</view>
+    </view>
+    <view class="capture-card" bindtap="capture">
+      <view class="row">
+        <view>
+          <view class="capture-title">拍下错题，理清思路</view>
+          <view class="capture-sub">识题 · 分步解析 · 自动归类</view>
+        </view>
+        <view class="capture-plus">＋</view>
+      </view>
+      <view class="capture-bottom">开始整理一道错题 →</view>
+    </view>
+    <view wx:if="{{summary}}" class="metrics">
+      <view class="card" bindtap="library">
+        <view class="metric">{{summary.total}}</view>
+        <view class="muted">收录错题</view>
+      </view>
+      <view class="card" bindtap="review">
+        <view class="metric">{{summary.pending}}</view>
+        <view class="muted">等待掌握</view>
+      </view>
+      <view class="card" bindtap="stats">
+        <view class="metric">{{summary.practiceCount}}</view>
+        <view class="muted">练习次数</view>
+      </view>
+    </view>
+    <view class="row">
+      <view class="section-title">最近整理</view><text class="link" bindtap="library">全部错题 ›</text>
+    </view>
+    <question-card wx:for="{{recent}}" wx:key="_id" item="{{item}}" bind:open="open" />
+    <view wx:if="{{!loading && !recent.length && !error}}" class="empty">错题库还是空的。拍下第一道错题，开始积累自己的解题方法。</view>
+    <view wx:if="{{loading}}" class="loading">正在翻开你的笔记…</view>
+    <view class="card">
+      <view class="section-title">错一题，练一组</view>
+      <view class="muted">把相同方法用在不同条件里，才算真正学会。<view></view>从错题详情中生成 3 道或 5 道同类型练习。</view>
+      <view class="link" bindtap="review">找到需要巩固的知识点 →</view>
+    </view>
+  </block>
+</view>
