@@ -1,0 +1,1 @@
+<view wx:if="{{mode === 'demo'}}" class="banner">本地演示 · 预置示例与本机数据，不调用真实 AI</view><view wx:if="{{mode === 'setup'}}" class="banner">待配置云环境 · 请在学习首页查看接入方式</view>

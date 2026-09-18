@@ -1,0 +1,57 @@
+.card {
+  padding: 28rpx;
+  background: white;
+  border: 1rpx solid #e5ebe5;
+  border-radius: 22rpx;
+  margin-bottom: 20rpx
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+  font-size: 22rpx;
+  margin-bottom: 18rpx
+}
+
+.subject {
+  color: #7c847d
+}
+
+.status {
+  color: #8f702e;
+  white-space: nowrap
+}
+
+.mastered {
+  color: #2a7651
+}
+
+.reviewing {
+  color: #586ead
+}
+
+.question {
+  font-size: 29rpx;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #20382c
+}
+
+.tags {
+  margin-top: 18rpx
+}
+
+.tags .tag {
+  display: inline-block;
+  padding: 4rpx 14rpx;
+  background: #edf3ec;
+  color: #53775b;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  margin: 4rpx 8rpx 4rpx 0
+}

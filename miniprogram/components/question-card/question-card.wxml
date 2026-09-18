@@ -1,0 +1,1 @@
+<view class="card" bindtap="open"><view class="meta"><text class="subject">{{item.subject}} · {{item.chapter}}</text><text class="status {{item.status}}">{{item.statusLabel}}</text></view><view class="question">{{item.questionText}}</view><view class="tags"><text wx:for="{{item.knowledgePoints}}" wx:key="*this">{{item}}</text></view></view>
