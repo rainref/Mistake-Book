@@ -22,7 +22,7 @@
       <view class="picker">{{subjects[subjectIndex]}} ▾</view>
     </picker>
     <view class="actions"><button class="primary" bindtap="analyze" disabled="{{busy || loading || !ready}}" loading="{{busy}}">识题与 AI 分步解析</button></view>
-    <view class="notice">图片仅用于识题与保存原题。请裁剪掉姓名等无关信息。AI 结果请核对后保存。</view>
+    <view class="notice">拍照 / 选图后可拖动边框裁出本题区域。图片仅用于识题与保存原题，请避开姓名等无关信息。AI 结果请核对后保存。</view>
   </view>
   <view wx:if="{{progress}}" class="loading">{{progress}}</view>
   <view class="card">

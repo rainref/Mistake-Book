@@ -28,8 +28,15 @@ Page({
  subject(e){this.setData({subjectIndex:Number(e.detail.value)});this.draft()},
  async choose(){
   if(this.data.busy||!this.ready)return
-  this.setData({busy:true,error:'',progress:'选择并压缩图片…'})
-  try{const image=await images.choose();this.setData({progress:'正在上传题目图片…'});const uploaded=await api.upload(image.filePath,image.extension);this.setData({mediaId:uploaded.mediaId,photo:uploaded.fileID});this.draft()}
+  this.setData({busy:true,error:'',progress:'选择并裁剪图片…'})
+  try{
+   const picked=await images.pick()
+   this.setData({progress:'正在上传题目图片…'})
+   const edited=await images.edit(picked)
+   const image=await images.prepare(edited)
+   const uploaded=await api.upload(image.filePath,image.extension)
+   this.setData({mediaId:uploaded.mediaId,photo:uploaded.fileID});this.draft()
+  }
   catch(e){if(!/cancel/i.test(e.errMsg||''))ui.error(this,e)}finally{this.setData({busy:false,progress:''})}
  },
  removePhoto(){this.setData({mediaId:'',photo:''});this.draft()},
